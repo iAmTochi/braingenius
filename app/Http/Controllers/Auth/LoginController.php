@@ -87,6 +87,8 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
+
+
     public function login_count($request){
 
         $user = DB::table('users')->where('username', '=',$request->username)->first();
