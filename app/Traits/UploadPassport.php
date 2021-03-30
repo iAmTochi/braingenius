@@ -15,7 +15,7 @@ trait UploadPassport
     private  function hasImage($request,$path,$user=null){
 
         $this->validate($request, [
-            'image'  => 'required|image|mimes:jpeg,png,jpg,PNG,JPG,JPEG|max:50',
+            'image'  => 'required|mimes:jpeg,png,jpg,PNG,JPG,JPEG|max:50',
         ]);
 
         if($user) {

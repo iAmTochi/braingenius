@@ -55,7 +55,7 @@
                     @include('partials.notify')
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="pills-setting-tab">
                         <div class="card-body">
-                            <form class="form-horizontal" action="{{ route('admin.update',$admin->uuid) }}" method="POST" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{ route('admin.update', auth()->user()->admin->user_uuid) }}" method="POST" enctype="multipart/form-data">
                                 @csrf @method('PUT')
                                     <div class="form-group row">
                                         <label for="last_name" class="col-sm-3 text-right control-label col-form-label">Last Name</label>

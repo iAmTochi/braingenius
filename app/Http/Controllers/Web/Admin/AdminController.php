@@ -24,10 +24,11 @@ class AdminController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * Display a listing of the resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function index()
     {
 //        dd(auth()->user()->admin->uuid);

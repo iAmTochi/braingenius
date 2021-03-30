@@ -19,6 +19,7 @@ use App\Repositories\Student\EloquentStudent;
 use App\Repositories\StudentRepository;
 use App\Repositories\Subject\EloquentSubject;
 use App\Repositories\Subject\SubjectRepository;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -50,5 +51,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('active_session', Session::where('status',1)->first() );
+        Builder::$defaultStringLength = 191;
+
     }
 }

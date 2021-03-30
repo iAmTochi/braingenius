@@ -6,9 +6,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body wizard-content">
-                    <h4 class="card-title">Step wizard with validation</h4>
-                    <h6 class="card-subtitle">You can us the validation like what we did</h6>
-                    <form action="#" class="validation-wizard wizard-circle mt-5" method="POST" enctype="multipart/form-data">
+                    <h4 class="card-title">New Student</h4>
+{{--                    <h6 class="card-subtitle">You can us the validation like what we did</h6>--}}
+                    <form id="register-student" action="{{ route('student.store') }}" class="validation-wizard wizard-circle mt-5" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <!-- Step 1 -->
                         <h6>Student Information</h6>
                         <section>
@@ -16,19 +17,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="last_name"> Surname Name :</label>
-                                        <input value="{{ old('last_name') }}" type="text" class="form-control" id="last_name" name="last_name">
+                                        <input required value="{{ old('last_name') }}" type="text" class="form-control" id="last_name" name="last_name">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="first_name"> First Name : <span class="danger">*</span> </label>
-                                        <input type="text" class="form-control " id="first_name" name="first_name" value="{{ old('first_name') }}">
+                                        <input required type="text" class="form-control " id="first_name" name="first_name" value="{{ old('first_name') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="other_name"> Other Name : <span class="danger">*</span> </label>
-                                        <input type="text" class="form-control" id="other_name" name="other_name" value="{{ old('other_name') }}">
+                                        <input  type="text" class="form-control" id="other_name" name="other_name" value="{{ old('other_name') }}">
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="soo"> State of Origin : </label>
-                                        <select id="soo" name="soo" class="select2  @error('soo') is-invalid @enderror" style="width: 100%">
+                                        <select required id="soo" name="soo" class="select2  @error('soo') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             @foreach($states as $state)
                                             <option value="{{ $state->id }}" {{ (old('soo') == $state->id)?'selected':''  }}>{{ $state->state_name }}</option>
@@ -57,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="lga"> L.G.A :  </label>
-                                        <select id="lga" name="lga" class="select2  @error('lga') is-invalid @enderror" style="width: 100%">
+                                        <select required id="lga" name="lga" class="select2  @error('lga') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             @foreach($lgas as $lga)
                                                 <option value="{{ $lga->id }}" {{ (old('lga') == $lga->id)?'selected':''  }}>{{ $lga->lga_name }}</option>
@@ -74,7 +75,7 @@
                                     <div class="form-group">
                                         <label for="gender"> Gender :</label>
 {{--                                        <input  type="text" class="form-control" id="gender" name="gender">--}}
-                                        <select id="gender" name="gender" class="select2  @error('gender') is-invalid @enderror" style="width: 100%">
+                                        <select required id="gender" name="gender" class="select2  @error('gender') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             <option value="m" {{ (old('gender') == 'm')?'selected':''  }}>Male</option>
                                             <option value="f" {{ (old('gender') == 'f')?'selected':''  }}>Female</option>
@@ -87,7 +88,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dob">Date of Birth :</label>
-                                        <input type="text" class="form-control mdate " id="dob" name="dob">
+                                        <input required type="text" class="form-control mdate " id="dob" name="dob">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -107,7 +108,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="genotype">Genotype :</label>
-                                        <select id="genotype" name="genotype" class="select2  @error('genotype') is-invalid @enderror" style="width: 100%">
+                                        <select  id="genotype" name="genotype" class="select2  @error('genotype') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             @foreach($genotypes as $genotype)
                                                 <option value="{{ $genotype->id }}" {{ (old('genotype') == $genotype->id)?'selected':''  }}>{{ $genotype->name }}</option>
@@ -290,7 +291,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="home_address"> Home Address : </label>
-                                        <input id="home_address" name="home_address" class="parent form-control  @error('home_address') is-invalid @enderror" >
+                                        <input id="home_address" name="home_address" class="parent form-control required @error('home_address') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('home_address')}}</strong>
                                         </span>
@@ -299,7 +300,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="office_address"> Office Address :  </label>
-                                        <input id="office_address" name="office_address" class="parent form-control required @error('office_address') is-invalid @enderror" >
+                                        <input id="office_address" name="office_address" class="parent form-control  @error('office_address') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('office_address')}}</strong>
                                         </span>
@@ -353,6 +354,8 @@
 
     <script src="{{ asset('') }}assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
     <script src="{{ asset('') }}assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+
+    <link href="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <script>
 
         var form = $(".validation-wizard").show();
@@ -372,7 +375,9 @@
                 return form.validate().settings.ignore = ":disabled", form.valid()
             },
             onFinished: function(event, currentIndex) {
-                swal("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+                console.log('registering...');
+                $('#register-student').submit();
+                // swal("6Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
             }
         }),
             $(".validation-wizard").validate({
@@ -406,6 +411,52 @@
                 $('#existing-parent-username').hide('slow')
             }
         })
+
+
+
+        // $('#').oncl
+        // #register-student
+
+        $('#finish').on('click', function () {
+            console.log('registering...')
+
+        });
+
+        function ajaxHeader() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+        }
+
+        function register_student(data){
+            ajaxHeader();
+            $.ajax({
+                url: "topup/transfer",
+                method: "POST",
+                data: data,
+                success: function (data) {
+                    if(data !== 'failed'){
+                        $('#top_up_phone_no').val('');
+                        $('#top_up_amount').val('');
+                        $('#network_provider_vtu').val('');
+                        $('#network_provider_data').val('');
+                        $('#top_up_package').val('');
+
+                        sendBtn();
+                        $('#top_up_response').html(data).slideDown("slow").delay(4000).slideUp("slow");
+                        $('#btn-send').text('Confirm and Send');
+                        walletBalance();
+
+                    }else if(data === 'insufficient funds'){
+                        $('#top_up_response').html(data).slideDown("slow").delay(4000).slideUp("slow");
+                    }
+                }
+
+
+            });
+        }
     </script>
 
     <script src="{{ asset('') }}assets/libs/moment/moment.js"></script>
@@ -417,6 +468,10 @@
     <script src="{{ asset('') }}assets/libs/select2/dist/js/select2.full.min.js"></script>
     <script src="{{ asset('') }}assets/libs/select2/dist/js/select2.min.js"></script>
     <script src="{{ asset('') }}js/pages/forms/select2/select2.init.js"></script>
+
+{{--    <script src="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>--}}
+{{--    <script src="{{ asset('') }}assets/extra-libs/sweetalert2/sweet-alert.init.js"></script>--}}
+{{--    @include('partials.sweet_alert')--}}
 
 @endsection
 

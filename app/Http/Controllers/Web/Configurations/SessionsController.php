@@ -40,6 +40,10 @@ class SessionsController extends Controller
             ->withCreateNewSection($create_new_session);
     }
 
+    /**
+     * For moving the session to another term/session
+     *
+     */
     public function move(){
         $current_session = $this->academic_session->current_session();
         $current_session->uuid;
