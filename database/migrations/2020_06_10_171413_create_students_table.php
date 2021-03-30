@@ -30,7 +30,7 @@ class CreateStudentsTable extends Migration
             $table->string('house_uuid');
             $table->string('class_arm_uuid');
             $table->integer('resident_type');
-            $table->string('parent_uuid');
+            $table->string('guardian_uuid');
             $table->integer('genotype_id');
             $table->integer('religion_id');
 
