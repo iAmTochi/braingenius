@@ -16,7 +16,7 @@ class CreateGuardiansTable extends Migration
         Schema::create('guardians', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_uuid')->index()->unique();
-            $table->string('title','50');
+            $table->string('title','50')->nullable();
             $table->string('last_name','50');
             $table->string('first_name','50');
             $table->string('other_name', '50')->nullable();

@@ -71,7 +71,7 @@ class EloquentClassArm implements ClassArmRepository
      */
     public function all()
     {
-        return ClassArm::select(['class_arms.uuid as id','name','arm'])
+        return ClassArm::select(['class_arms.uuid as uuid','name','arm'])
             ->join('arms','arms.uuid','=','class_arms.arm_uuid')
             ->join('classes','classes.uuid','=','class_arms.class_uuid')->get();
 //        return DB::table('class_arms')->select(['name','arm'])

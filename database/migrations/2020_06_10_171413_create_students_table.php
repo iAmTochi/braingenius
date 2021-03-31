@@ -31,8 +31,8 @@ class CreateStudentsTable extends Migration
             $table->string('class_arm_uuid');
             $table->integer('resident_type');
             $table->string('guardian_uuid');
-            $table->integer('genotype_id');
-            $table->integer('religion_id');
+            $table->integer('genotype_id')->nullable();
+            $table->integer('religion_id')->nullable();
 
 
 
@@ -40,16 +40,17 @@ class CreateStudentsTable extends Migration
             $table->string('session_reg_uuid');
 
             $table->boolean('graduated')->default(0)->comment('1 = yes; 0 = no');
-            $table->date('graduated_date');
-            $table->string('graduate_class_arm_uuid');
-            $table->string('graduate_session_uuid');
+            $table->date('graduated_date')->nullable();
+            $table->string('graduate_class_arm_uuid')->nullable();
+            $table->string('graduate_session_uuid')->nullable();
+
             $table->boolean('dropout')->default(0)->comment('1 = yes; 0 = no');;
-            $table->date('dropout_date');
-            $table->string('dropout_class_arm_uuid');
-            $table->string('dropout_session_uuid');
-            $table->longText('dropout_reason');
-            $table->text('prev_sch_attended');
-            $table->date('prev_sch_attended_date');
+            $table->date('dropout_date')->nullable();
+            $table->string('dropout_class_arm_uuid')->nullable();
+            $table->string('dropout_session_uuid')->nullable();
+            $table->longText('dropout_reason')->nullable();
+            $table->text('prev_sch_attended')->nullable();
+            $table->date('prev_sch_attended_date')->nullable();
 
 
 

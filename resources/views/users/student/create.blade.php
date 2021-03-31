@@ -138,7 +138,7 @@
                                         <select id="class_arm" name="class_arm" class="select2 @error('class_arm') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             @foreach($classArms as $classArm)
-                                            <option value="{{ $classArm->id }}" {{ (old('class_arm') == $classArm->id)?'selected':''  }}>  {{ $classArm->name.$classArm->arm }}</option>
+                                            <option value="{{ $classArm->uuid }}" {{ (old('class_arm') == $classArm->uuid)?'selected':''  }}>  {{ $classArm->name.$classArm->arm }} </option>
                                             @endforeach
                                         </select>
                                         <span role="alert" class="invalid-feedback">
