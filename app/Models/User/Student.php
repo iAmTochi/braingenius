@@ -14,6 +14,7 @@ class Student extends Model
         DeleteFile;
 
     protected $fillable = [
+        'user_uuid',
         'admin_num',
         'last_name',
         'first_name',

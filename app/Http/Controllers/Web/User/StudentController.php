@@ -12,6 +12,7 @@ use App\Models\State\Lga;
 use App\Models\State\State;
 use App\Models\User;
 use App\Models\User\Guardian;
+use App\Models\User\Student;
 use App\Traits\GenerateUsername;
 use App\Traits\UploadPassport;
 use Illuminate\Http\Request;
@@ -88,11 +89,24 @@ class StudentController extends Controller
             ]);
 
             $guardian = Guardian::create([
-
+                'user_uuid'     => $guard_user->uuid,
+                'title'         => $request->title,
+                'last_name'     => $request->p_last_name,
+                'first_name'    => $request->p_first_name,
+                'other_name'    => $request->p_other_name,
+                'email'     => $request->p_email,
+                'phone'     => $request->p_phone,
+                'image'     => $request->p_last_name,
+                'house_address'     => $request->home_address,
+                'office_address'    => $request->office_address,
+                'occupation'        => $request->occupation,
+                'next_kin'          => $request->next_kin,
+                'next_kin_phone'    => $request->next_kin_phone,
+                'created_by'    => auth()->user()->uuid,
             ]);
 
             $student = Student::create([
-
+                'user_uuid' => $stud_user->uuid,
             ]);
 
 
