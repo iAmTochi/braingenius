@@ -53,14 +53,24 @@
                             @csrf
                             <div class="form-group mb-3">
                                 <div class="col-xs-12">
-                                    <input name="email" class="form-control @error('email') is-invalid @enderror" type="text" placeholder="{{ __('Email') }}" value="{{ old('email') }}" autofocus>
-                                    @error('email')
+                                    <input name="username" class="form-control @error('username') is-invalid @enderror" type="text" placeholder="{{ __('Username') }}" value="{{ old('username') }}" autofocus>
+                                    @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
+{{--                            <div class="form-group mb-3">--}}
+{{--                                <div class="col-xs-12">--}}
+{{--                                    <input name="email" class="form-control @error('email') is-invalid @enderror" type="text" placeholder="{{ __('Email') }}" value="{{ old('email') }}" autofocus>--}}
+{{--                                    @error('email')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group mb-3">
                                 <div class="col-xs-12">
                                     <input class="form-control  @error('password') is-invalid @enderror" name="password" type="password"  autocomplete="current-password" placeholder="{{ __('Password') }}">
