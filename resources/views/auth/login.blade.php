@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -54,8 +53,8 @@
                             @csrf
                             <div class="form-group mb-3">
                                 <div class="col-xs-12">
-                                    <input name="username" class="form-control @error('username') is-invalid @enderror" type="text" placeholder="{{ __('Username') }}" value="{{ old('username') }}" autofocus>
-                                    @error('username')
+                                    <input name="email" class="form-control @error('email') is-invalid @enderror" type="text" placeholder="{{ __('Email') }}" value="{{ old('email') }}" autofocus>
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -156,9 +155,9 @@
 <script>
     $('[data-toggle="tooltip"]').tooltip();
     $(".preloader").fadeOut();
-    // ============================================================== 
-    // Login and Recover Password 
-    // ============================================================== 
+    // ==============================================================
+    // Login and Recover Password
+    // ==============================================================
     $('#to-recover').on("click", function() {
         $("#loginform").slideUp();
         $("#recoverform").fadeIn();

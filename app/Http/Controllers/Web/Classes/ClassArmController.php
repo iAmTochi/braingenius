@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Web\Classes;
 
 use App\Http\Requests\Classes\CreateClassArmRequest;
-use App\Model\Classes\ClassArm;
-use App\Repositories\Classes\ClassArmRepository;
+use App\Models\Classes\ClassArm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +13,9 @@ class ClassArmController extends Controller
     private $classArm;
 
 
-    public function __construct(ClassArmRepository $classArm)
+    public function __construct()
     {
-        $this->classArm = $classArm;
+        $this->classArm = new ClassArm();
     }
 
     /**
@@ -29,7 +28,8 @@ class ClassArmController extends Controller
 //        dd($this->classArm->all());
         $classArmCount = 0;
         $title = "Manage class arms";
-        return view('classes.class_arm')->with('classArms', $this->classArm->all())
+        return view('classes.class_arm')
+            ->with('classArms', $this->classArm->classArms())
             ->with('classArmCount', $classArmCount)
             ->with('title', $title);
     }

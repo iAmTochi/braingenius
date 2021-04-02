@@ -14,6 +14,24 @@ class Guardian extends Model
         SoftDeletes,
         DeleteFile;
 
+    protected $fillable = [
+        'user_uuid',
+        'title',
+        'last_name',
+        'first_name',
+        'other_name',
+        'email',
+        'phone',
+        'house_address',
+        'office_address',
+        'occupation',
+        'next_kin',
+        'next_kin_phone',
+        'image',
+        'created_by',
+        'updated_by',
+    ];
+
 
 
 

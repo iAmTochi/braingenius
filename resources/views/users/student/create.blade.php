@@ -12,6 +12,9 @@
                         @csrf
                         <!-- Step 1 -->
                         <h6>Student Information</h6>
+{{--                            @if($errors->any())--}}
+{{--                                {!! implode('', $errors->all('<div>:message</div>')) !!}--}}
+{{--                            @endif--}}
                         <section>
                             <div class="row">
                                 <div class="col-md-4">
@@ -88,7 +91,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dob">Date of Birth :</label>
-                                        <input required type="text" class="form-control mdate " id="dob" name="dob">
+                                        <input required type="text" class="form-control mdate " id="dob" name="dob" value="{{ old('dob') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -129,7 +132,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="admin_no">Admission No :</label>
-                                        <input type="text" class="form-control" id="admin_no" name="admin_no" value="{{ old('admin_no') }}">
+                                        <input type="text" class="form-control @error('admin_no') is-invalid @enderror" id="admin_no" name="admin_no" value="{{ old('admin_no') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('admin_no')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -169,7 +175,6 @@
                                         <label for="hostel"> Hostel : </label>
                                         <select id="hostel" name="hostel" class="select2  @error('hostel') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
-
                                         </select>
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('hostel')}}</strong>
@@ -196,13 +201,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="prev_sch">Previous School Attended (If any) :</label>
-                                        <input type="text" class="form-control" id="prev_sch" name="prev_sch" value="{{ old('prev_sch') }}">
+                                        <input type="text" class="form-control @error('prev_sch') is-invalid @enderror" id="prev_sch" name="prev_sch" value="{{ old('prev_sch') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('prev_sch')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date_prev_sch">Date of Previous School :</label>
-                                        <input  id="date_prev_sch" name="date_prev_sch" class="form-control mdate @error('date_prev_sch') is-invalid @enderror">
+                                        <input  id="date_prev_sch" name="date_prev_sch" value="{{ old('date_prev_sch') }}" class="form-control mdate @error('date_prev_sch') is-invalid @enderror">
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('date_prev_sch')}}</strong>
                                         </span>
@@ -229,14 +237,14 @@
                                 </div>
                                 <div class="col-md-4" id="existing-parent-username" style="display: none">
                                     <div class="form-group">
-                                        <label for="pUsername"> Parent Username :  </label>
-                                        <input type="text" class="form-control " id="pUsername" name="pUsername" value="{{ old('pUsername') }}" placeholder="Enter Username of Existing Parent here">
+                                        <label for="p_username"> Parent Username :  </label>
+                                        <input type="text" class="form-control " id="p_username" name="p_username" value="{{ old('p_username') }}" placeholder="Enter Username of Existing Parent here">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pTitle"> Title :  </label>
-                                        <input type="text" class="parent form-control " id="pTitle" name="pTitle" value="{{ old('pTitle') }}">
+                                        <label for="p_title"> Title :  </label>
+                                        <input type="text" class="parent form-control " id="p_title" name="p_title" value="{{ old('p_title') }}">
                                     </div>
                                 </div>
 
@@ -244,54 +252,75 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="plast_name"> Surname Name : <span class="danger">*</span> </label>
-                                        <input value="{{ old('plast_name') }}" type="text" class="parent form-control required" id="plast_name" name="plast_name">
+                                        <label for="p_last_name"> Surname Name : <span class="danger">*</span> </label>
+                                        <input value="{{ old('p_last_name') }}" type="text" class="parent form-control required @error('p_last_name') is-invalid @enderror" id="p_last_name" name="p_last_name">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_last_name')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pfirst_name"> First Name : <span class="danger">*</span> </label>
-                                        <input type="text" class="parent form-control required" id="pfirst_name" name="pfirst_name" value="{{ old('pfirst_name') }}">
+                                        <label for="p_first_name"> First Name : <span class="danger">*</span> </label>
+                                        <input type="text" class="parent form-control required @error('p_first_name') is-invalid @enderror" id="p_first_name" name="p_first_name" value="{{ old('p_first_name') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_first_name')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pother_name"> Other Name : <span class="danger">*</span> </label>
-                                        <input type="text" class="parent form-control" id="pother_name" name="pother_name" value="{{ old('pother_name') }}">
+                                        <label for="p_other_name"> Other Name : <span class="danger">*</span> </label>
+                                        <input type="text" class="parent form-control @error('p_other_name') is-invalid @enderror" id="p_other_name" name="p_other_name" value="{{ old('p_other_name') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_other_name')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pEmail"> Email Address :  </label>
-                                        <input value="{{ old('pEmail') }}" type="email" class="parent form-control required" id="pEmail" name="pEmail">
+                                        <label for="p_email"> Email Address :  </label>
+                                        <input value="{{ old('p_email') }}" type="email" class="parent form-control required @error('p_email') is-invalid @enderror" id="p_email" name="p_email">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_email')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pPhone"> Phone Number :  </label>
-                                        <input type="text" class="parent form-control required" id="pPhone" name="pPhone" value="{{ old('pPhone') }}">
+                                        <label for="p_phone"> Phone Number :  </label>
+                                        <input type="text" class="parent form-control required @error('p_phone') is-invalid @enderror" id="p_phone" name="p_phone" value="{{ old('p_phone') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_phone')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="occupation"> Occupation : <span class="danger">*</span> </label>
-                                        <input type="text" class="parent form-control" id="occupation" name="occupation" value="{{ old('occupation') }}">
+                                        <input type="text" class="parent form-control @error('occupation') is-invalid @enderror" id="occupation" name="occupation" value="{{ old('occupation') }}">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('occupation')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pimage"> Upload Parent Passport :</label>
-                                        <input  type="file" class="parent form-control" id="pimage" name="pimage">
+                                        <label for="p_image"> Upload Parent Passport :</label>
+                                        <input  type="file" class="parent form-control @error('home_address') is-invalid @enderror" id="p_image" name="p_image">
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>{{$errors->first('p_image')}}</strong>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="home_address"> Home Address : </label>
-                                        <input id="home_address" name="home_address" class="parent form-control required @error('home_address') is-invalid @enderror" >
+                                        <input value="{{ old('home_address') }}" id="home_address" name="home_address" class="parent form-control required @error('home_address') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('home_address')}}</strong>
                                         </span>
@@ -300,7 +329,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="office_address"> Office Address :  </label>
-                                        <input id="office_address" name="office_address" class="parent form-control  @error('office_address') is-invalid @enderror" >
+                                        <input value="{{ old('office_address') }}" id="office_address" name="office_address" class="parent form-control  @error('office_address') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('office_address')}}</strong>
                                         </span>
@@ -311,7 +340,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="next_of_kin"> Next of Kin Name : </label>
-                                        <input id="next_of_kin" name="next_of_kin" class="parent form-control  @error('next_of_kin') is-invalid @enderror" >
+                                        <input value="{{ old('next_of_kin') }}" id="next_of_kin" name="next_of_kin" class="parent form-control  @error('next_of_kin') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('next_of_kin')}}</strong>
                                         </span>
@@ -320,7 +349,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="next_of_kin_phone"> Next of Kin Phone : </label>
-                                        <input id="next_of_kin_phone" name="next_of_kin_phone" class="parent form-control  @error('next_of_kin_phone') is-invalid @enderror" >
+                                        <input value="{{ old('next_of_kin_phone') }}" id="next_of_kin_phone" name="next_of_kin_phone" class="parent form-control  @error('next_of_kin_phone') is-invalid @enderror" >
                                         <span role="alert" class="invalid-feedback">
                                             <strong>{{$errors->first('next_of_kin_phone')}}</strong>
                                         </span>

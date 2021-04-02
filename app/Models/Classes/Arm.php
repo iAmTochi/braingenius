@@ -22,4 +22,16 @@ class Arm extends Model
 
         return $this->belongsToMany(Classes::class);
     }
+
+
+    /**
+     * @param int $count
+     * @return mixed
+     */
+    public function latest($count = 20)
+    {
+        return $this->orderBy('created_at', 'DESC')
+            ->limit($count)
+            ->get();
+    }
 }

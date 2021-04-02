@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web\Classes;
 use App\Http\Requests\Classes\CreateArmRequest;
 use App\Models\Classes\Arm;
 use App\Models\Classes\Classes;
-use App\Repositories\Classes\ArmRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +14,9 @@ class ArmController extends Controller
 
     private $arm;
 
-    public function __construct(ArmRepository $arm)
+    public function __construct()
     {
-        $this->arm = $arm;
+        $this->arm = new Arm();
 
     }
 

@@ -1,5 +1,17 @@
 <?php
 
+use App\Http\Controllers\Web\Classes\ArmController;
+use App\Http\Controllers\Web\Classes\ClassArmController;
+use App\Http\Controllers\Web\Classes\ClassesController;
+use App\Http\Controllers\Web\Configurations\SessionsController;
+use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\Department\DepartmentController;
+use App\Http\Controllers\Web\Subject\SubjectController;
+use App\Http\Controllers\Web\User\AdminController;
+use App\Http\Controllers\Web\User\StaffController;
+use App\Http\Controllers\Web\User\StudentController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,47 +23,39 @@
 |
 */
 
-
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/', function () {
     return redirect()->route('home');
 });
 
-Auth::routes();
-
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/home',   'Web\DashboardController@index')->name('home');
-    Route::get('staff/my-profile',     'Web\Admin\StaffController@profile')->name('staff.profile');
+    Route::get('/dashboard',   [DashboardController::class, 'index'])->name('home');
+    Route::get('staff/my-profile',     [StaffController::class, 'profile'])->name('staff.profile');
 
 
     /*--------------- Class route ----------------- */
-    Route::resource('classes/arm',          'Web\Classes\ArmController');
-    Route::resource('classes/class',                'Web\Classes\ClassesController');
-    Route::resource('classes/class-arm',    'Web\Classes\ClassArmController');
+    Route::resource('classes/arm',          ArmController::class);
+    Route::resource('classes/class',                ClassesController::class);
+    Route::resource('classes/class-arm',    ClassArmController::class);
 
     /*----------------- Subject route --------------*/
-    Route::resource('school/department',    'Web\Department\DepartmentController');
-    Route::resource('school/subject',    'Web\Subject\SubjectController');
+    Route::resource('school/department',    DepartmentController::class);
+    Route::resource('school/subject',    SubjectController::class);
 
     /*----------------- staff route --------------*/
-    Route::resource('staff', 'Web\Admin\StaffController');
+    Route::resource('staff', StaffController::class);
 
     /*----------------- admin route --------------*/
     Route::middleware('isAdmin')->group(function () {
-        Route::get('admin/my-profile',  'Web\Admin\AdminController@profile')->name('admin.profile');
-        Route::resource('admin', 'Web\Admin\AdminController');
-        Route::resource('student', 'Web\Student\StudentController');
+        Route::get('admin/my-profile',  [AdminController::class, 'profile'])->name('admin.profile');
+        Route::resource('admin', AdminController::class);
+        Route::resource('student', StudentController::class);
 
     });
 
     Route::group(['prefix' => 'school-configuration'], function () {
-        Route::resource('academic-sessions', 'Web\Configurations\SessionsController');
-        Route::get('move', 'Web\Configurations\SessionsController@move')->name('move');
+        Route::resource('academic-sessions', SessionsController::class);
+        Route::get('move', [SessionsController::class, 'move'])->name('move');
 
 
 
@@ -63,3 +67,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
