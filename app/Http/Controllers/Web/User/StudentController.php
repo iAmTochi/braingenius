@@ -12,13 +12,18 @@ use App\Models\State\Lga;
 use App\Models\State\State;
 use App\Models\User;
 use App\Models\User\Guardian;
+use App\Traits\GenerateUsername;
+use App\Traits\UploadPassport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class StudentController extends Controller
 {
+    use GenerateUsername, UploadPassport;
     private $classArm;
 
     public function __construct()
@@ -68,14 +73,14 @@ class StudentController extends Controller
 
         try {
             $guard_user = User::create([
-                'username' => 'code_tochi',
+                'username' => $this->generateUsername('','',''),
                 'type'=> 'lvl02',
                 'status' => true,
-                'email' => 'ugwukelvintochukwu@gmail.com',
+                //'email' => 'ugwukelvintochukwu@gmail.com',
                 'password' => Hash::make('Welcome@1'),
             ]);
             $stud_user = User::create([
-                'username' => 'code_tochi',
+                'username' => $this->generateUsername('','',''),
                 'type'=> 'lvl01',
                 'status' => true,
                 //'email' => 'ugwukelvintochukwu@gmail.com',

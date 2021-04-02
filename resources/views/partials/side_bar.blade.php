@@ -171,9 +171,9 @@
                         <!-- User profile image -->
                         <div class="profile-img m-auto">
                             @if(auth()->user()->isAdmin()  || auth()->user()->isSuperAdmin())
-                            <img src="{{ (!empty(auth()->user()->admin->image))? asset('storage/'.auth()->user()->admin->image) : Gravatar::src(auth()->user()->email) }}" alt="user" class="w-100 rounded-circle" />
+                            <img src="{{ (!empty(auth()->user()->admin->image))? asset('storage/'.auth()->user()->admin->image) : Gravatar::src(auth()->user()->admin->email) }}" alt="user" class="w-100 rounded-circle" />
                             @elseif(auth()->user()->type == 'lvl03')
-                            <img src="{{ (!empty(auth()->user()->staff->image))? asset('storage/'.auth()->user()->staff->image) : Gravatar::src(auth()->user()->email) }}" alt="user" class="w-100 rounded-circle" />
+                            <img src="{{ (!empty(auth()->user()->staff->image))? asset('storage/'.auth()->user()->staff->image) : Gravatar::src(auth()->user()->staff->email) }}" alt="user" class="w-100 rounded-circle" />
                             @endif
                         </div>
                         <!-- User profile text-->

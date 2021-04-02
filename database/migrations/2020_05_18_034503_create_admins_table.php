@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('last_name','50');
             $table->string('first_name','50');
             $table->string('other_name', '50')->nullable();
+            $table->string('email')->unique();
             $table->string('phone','15')->unique();
             $table->text('address');
             $table->date('dob');

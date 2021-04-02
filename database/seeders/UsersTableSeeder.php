@@ -26,7 +26,6 @@ class UsersTableSeeder extends Seeder
                 'username' => 'code_tochi',
                 'type'=> 'lvl05',
                 'status' => true,
-                'email' => 'ugwukelvintochukwu@gmail.com',
                 'password' => Hash::make('11111111'),
             ]);
 
@@ -60,6 +59,8 @@ class UsersTableSeeder extends Seeder
                 'user_uuid' => $dev->uuid,
                 'last_name' => 'Ugwu',
                 'first_name' => 'Tochukwu',
+                'other_name' => 'Kelvin',
+                'email' => 'ugwukelvintochukwu@gmail.com',
                 'phone'=> '08036037038',
                 'address'=> '8 Oba Fatai Aleiru Street, Lagos',
                 'dob' => '1991-01-24',

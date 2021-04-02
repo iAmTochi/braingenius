@@ -306,7 +306,7 @@
 
                                 @endif
                             </h4>
-                            <p class=" mb-0">{{ auth()->user()->email }}</p>
+                            <p class=" mb-0"><small><small>{{ auth()->user()->admin->email }}</small></small></p>
                         @if(auth()->user()->type == 'lvl05' || auth()->user()->type == 'lvl04' )
                             <!-- Super Admin  or Regular Admin-->
                                 <a href="{{ route("admin.profile") }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
