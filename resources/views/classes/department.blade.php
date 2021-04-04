@@ -135,6 +135,7 @@
 
 @section('css')
     <link href="{{ asset('') }}assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
 
 
@@ -144,5 +145,10 @@
     <script src="{{ asset('') }}assets/libs/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('') }}js/pages/datatable/custom-datatable.js"></script>
     <script src="{{ asset('') }}js/pages/datatable/datatable-basic.init.js"></script>
+
+    <script src="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('') }}assets/extra-libs/sweetalert2/sweet-alert.init.js"></script>
+    <script src="{{ asset('') }}js/main.js"></script>
+    @include('partials.sweet_alert')
 
 @endsection

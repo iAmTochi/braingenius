@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @include('partials.notify')
+{{--                    @include('partials.notify')--}}
                     <h4 class="card-title">Create Class Arm</h4>
                     <h6 class="card-subtitle"> <small>Add a new class arm to the system (e.g. JSS1A)</small></h6>
                     <form action="{{ route('class-arm.store') }}" method="POST">
@@ -93,7 +93,7 @@
                         <div class="row">
                             <!--/span-->
                             <div class="col-md-12">
-                                @include('partials.notify')
+{{--                                @include('partials.notify')--}}
                                 <div class="form-group">
                                     <label for="arm">Arm Name</label>
                                     <input id="arm" name="arm" type="text" class="form-control @error('arm') is-invalid @enderror" placeholder="e.g A">
@@ -160,10 +160,16 @@
 @section('css')
     <!-- page CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('') }}assets/libs/select2/dist/css/select2.min.css">
+    <link href="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
 
 @section('scripts')
     <script src="{{ asset('') }}assets/libs/select2/dist/js/select2.full.min.js"></script>
     <script src="{{ asset('') }}assets/libs/select2/dist/js/select2.min.js"></script>
     <script src="{{ asset('') }}js/pages/forms/select2/select2.init.js"></script>
+
+    <script src="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('') }}assets/extra-libs/sweetalert2/sweet-alert.init.js"></script>
+    <script src="{{ asset('') }}js/main.js"></script>
+    @include('partials.sweet_alert')
 @endsection

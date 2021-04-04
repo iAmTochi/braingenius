@@ -24,9 +24,9 @@ class CreateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'dept_id'       => 'required',
-            'full_name'     => 'required|unique:subjects',
-            'short_name'    => 'required|unique:subjects',
+            'department'    => 'required|string',
+            'full_name'     => 'required|string|unique:subjects',
+            'short_name'    => 'required|string|unique:subjects',
         ];
     }
 }

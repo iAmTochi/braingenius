@@ -21,12 +21,12 @@ class ClassArm extends Model
 
     public function arms(){
 
-        return $this->hasMany(Arm::class,'uuid','uuid');
+        //return $this->hasMany(Arm::class,'arm_uuid','uuid');
     }
 
     public function classes(){
 
-        return $this->hasMany(Classes::class);
+        //return $this->hasMany(Classes::class,'class_uuid','uuid');
 
     }
 

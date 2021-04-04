@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Web\Subject;
 
 
 use App\Http\Requests\Subject\CreateSubjectRequest;
-use App\Model\Classes\Subject;
-use App\Repositories\Department\DepartmentRepository;
-use App\Repositories\Subject\SubjectRepository;
+
+use App\Models\Classes\Department;
+use App\Models\Classes\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,10 +16,10 @@ class SubjectController extends Controller
     private $subject;
     private $department;
 
-    public function __construct(DepartmentRepository $department, SubjectRepository $subject)
+    public function __construct()
     {
-        $this->department = $department;
-        $this->subject = $subject;
+        $this->department = new Department();
+        $this->subject = new Subject();
     }
 
     /**
@@ -33,8 +33,8 @@ class SubjectController extends Controller
         $title = 'Subject';
         $subjectCount = 0;
         return view('classes.subjects')
-            ->with('subjects', $this->subject->all())
-            ->with('departments', $this->department->all())
+            ->with('subjects', $this->subject->subjects())
+            ->with('departments', $this->department->departments())
             ->with('title', $title)->with('subjectCount', $subjectCount);
     }
 
@@ -57,12 +57,12 @@ class SubjectController extends Controller
     public function store(CreateSubjectRequest $request)
     {
 
-        $data['full_name']      =   ucfirst($request->name);
-        $data['short_name']     =   strtoupper($request->short);
-        $data['dept_uuid']      =   $request->dept_id;
-        $data['created_by']      =  auth()->user()->uuid;
-
-        $this->subject->create($data);
+        $this->subject->create([
+            'full_name' => ucfirst($request->full_name),
+            'short_name' => strtoupper($request->short_name),
+            'dept_uuid' => $request->department,
+            'created_by' => auth()->user()->uuid
+        ]);
 
         session()->flash('success','Subject created successfully');
 

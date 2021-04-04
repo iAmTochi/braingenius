@@ -20,7 +20,6 @@
                             <thead class="bg-primary text-white">
                             <tr>
                                 <th>S/N</th>
-                                <th></th>
                                 <th>Name</th>
                                 <th>Class</th>
                                 <th>Username</th>

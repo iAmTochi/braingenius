@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Web\Department;
 use App\Helpers\UuidHelper;
 use App\Http\Requests\Department\CreateDepartmentRequest;
 use App\Models\Classes\Department;
-use App\Repositories\Department\DepartmentRepository;
+
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
 use Browser;
 
 class DepartmentController extends Controller
 {
     private $department;
 
-    public function __construct(DepartmentRepository $department)
+    public function __construct()
     {
-        $this->department = $department;
+        $this->department = new Department();
     }
 
     /**
@@ -30,7 +30,7 @@ class DepartmentController extends Controller
         $title = 'Departments';
         $deptCount = 0;
         return view('classes.department')
-            ->with('departments', Department::all())
+            ->with('departments', $this->department->departments())
             ->with('title', $title)->with('deptCount', $deptCount);
     }
 
@@ -54,14 +54,16 @@ class DepartmentController extends Controller
     {
 
 //        Browser::browserName();
-        $browserDetails = Browser::browserName();
-        $browser = Browser::platformName();
+       // $browserDetails = Browser::browserName();
+       // $browser = Browser::platformName();
 //        dd($browserDetails."::".$browser);
-        dd(UuidHelper::r());
-        $data['dept_name'] = strtoupper($request->dept_name);
-        $data['created_by'] = Auth::user()->uuid;
 
-        $this->department->create($data);
+
+
+        $this->department->create([
+            'dept_name' => strtoupper($request->dept_name),
+            'created_by' => auth()->user()->uuid
+        ]);
 
         session()->flash('success','Department  Added successfully');
 

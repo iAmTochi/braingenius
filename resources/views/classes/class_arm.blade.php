@@ -24,10 +24,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($classArms as $class)
+                            @foreach($classArms as $class_arm)
                                 <tr>
                                     <td>{{ ++$classArmCount }}</td>
-                                    <td>{{$class->name.$class->arm  }}</td>
+                                    <td>{{$class_arm->name. $class_arm->arm  }}</td>
                                     <td>0</td>
                                     <td>0</td>
                                     <td>0</td>

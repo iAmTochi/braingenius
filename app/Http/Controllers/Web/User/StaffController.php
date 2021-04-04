@@ -57,7 +57,7 @@ class StaffController extends Controller
         return view('users.staff.create')
 //            ->with('types',Type::all())
             ->with('title','Create New Staff Account')
-            ->with('departments', Department::all());
+            ->with('departments', $this->department->departments());
     }
 
     /**

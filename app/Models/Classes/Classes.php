@@ -19,4 +19,9 @@ class Classes extends Model
 
         return $this->belongsToMany(Arm::class);
     }
+
+//    public function classArms(){
+//
+//        return $this->hasMany(ClassArm::class,'class_uuid','uuid');
+//    }
 }

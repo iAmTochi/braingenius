@@ -36,5 +36,12 @@ class Department extends Model
         // TODO: Implement latest() method.
     }
 
+    /**
+     * @return mixed
+     */
+    public function departments()
+    {
+        return $this->all();
+    }
 
 }

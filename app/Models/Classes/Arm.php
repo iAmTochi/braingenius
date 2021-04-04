@@ -20,7 +20,7 @@ class Arm extends Model
 
     public function classes(){
 
-        return $this->belongsToMany(Classes::class);
+        return $this->hasMany(Classes::class,'');
     }
 
 

@@ -27,4 +27,10 @@ class Subject extends Model
 
         return $this->belongsToMany(Classes::class);
     }
+
+    public function subjects()
+    {
+        return Subject::join('departments','departments.uuid','=','subjects.dept_uuid')->get();
+
+    }
 }

@@ -72,7 +72,7 @@
 
 {{--                        </div>--}}
                         <div class="table-responsive">
-                            @include('partials.notify')
+{{--                            @include('partials.notify')--}}
                             <table id="scroll_hor" class="table table-hover table-striped table-bordered display no-wrap"
                                    style="width:100%">
                             <thead class="bg-primary text-white">
@@ -125,20 +125,29 @@
                     <form id="addSubject" action="{{ route('subject.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="name" class="control-label">Subject Name</label>
-                            <input type="text"  class="form-control" id="name" name="name" placeholder="Mathematics">
+                            <label for="full_name" class="control-label">Subject Name</label>
+                            <input value="{{ old('full_name') }}" type="text"  class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" placeholder="Mathematics">
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('full_name')}}</strong>
+                            </span>
                         </div>
                         <div class="form-group">
-                            <label for="short" class="control-label">Subject Short Name</label>
-                            <input type="text"  class="form-control" id="short" name="short" placeholder="e.g. MATHS">
+                            <label for="short_name" class="control-label">Subject Short Name</label>
+                            <input value="{{ old('short_name') }}" type="text"  class="form-control @error('short_name') is-invalid @enderror" id="short_name" name="short_name" placeholder="e.g. MATHS">
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('short_name')}}</strong>
+                            </span>
                         </div>
                         <div class="form-group">
-                            <select name="dept_id" class="select2" style="width: 100%">
+                            <select name="department" class="select2 @error('department') is-invalid @enderror" style="width: 100%">
                                 <option value="">Select Department</option>
                                 @foreach($departments as $department)
                                     <option value="{{ $department->uuid }}">{{ $department->dept_name }}</option>
                                 @endforeach
                             </select>
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('department')}}</strong>
+                            </span>
 
                         </div>
 
@@ -162,6 +171,7 @@
     <!-- page CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('') }}assets/libs/select2/dist/css/select2.min.css">
     <link href="{{ asset('') }}assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
 
 
@@ -174,5 +184,10 @@
     <script src="{{ asset('') }}assets/libs/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('') }}js/pages/datatable/custom-datatable.js"></script>
     <script src="{{ asset('') }}js/pages/datatable/datatable-basic.init.js"></script>
+
+    <script src="{{ asset('') }}assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('') }}assets/extra-libs/sweetalert2/sweet-alert.init.js"></script>
+    <script src="{{ asset('') }}js/main.js"></script>
+    @include('partials.sweet_alert')
 
 @endsection

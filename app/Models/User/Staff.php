@@ -2,9 +2,9 @@
 
 namespace App\Models\User;
 
+use App\Models\User;
 use App\Traits\DeleteFile;
 use App\Traits\UserUuidRouteKeyName;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

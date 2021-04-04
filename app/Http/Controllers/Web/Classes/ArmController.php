@@ -33,8 +33,7 @@ class ArmController extends Controller
         return view('classes.arm_and_class')
             ->with('arms', Arm::all())->with('armCount', $armCount)
             ->with('classes', Classes::all())->with('classCount', $classCount)
-            ->with('title', $title)
-            ;
+            ->with('title', $title);
     }
 
     /**
