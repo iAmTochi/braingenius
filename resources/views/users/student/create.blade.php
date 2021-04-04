@@ -140,15 +140,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="class_arm">Present Class Arm :</label>
-                                        <select id="class_arm" name="class_arm" class="select2 @error('class_arm') is-invalid @enderror" style="width: 100%">
+                                        <label for="class_arm_reg">Present Class Arm :</label>
+                                        <select id="class_arm_reg" name="class_arm_reg" class="select2 @error('class_arm_reg') is-invalid @enderror" style="width: 100%">
                                             <option value=""></option>
                                             @foreach($classArms as $classArm)
-                                            <option value="{{ $classArm->uuid }}" {{ (old('class_arm') == $classArm->uuid)?'selected':''  }}>  {{ $classArm->name.$classArm->arm }} </option>
+                                            <option value="{{ $classArm->uuid }}" {{ (old('class_arm_reg') == $classArm->uuid)?'selected':''  }}>  {{ $classArm->name.$classArm->arm }} </option>
                                             @endforeach
                                         </select>
                                         <span role="alert" class="invalid-feedback">
-                                            <strong>{{$errors->first('class_arm')}}</strong>
+                                            <strong>{{$errors->first('class_arm_reg')}}</strong>
                                         </span>
                                     </div>
                                 </div>

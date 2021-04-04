@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\User\Admin;
+use App\Models\User\Guardian;
 use App\Models\User\Staff;
+use App\Models\User\Student;
 use App\Models\User\Type;
 use App\Traits\Uuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -84,6 +86,13 @@ class User extends Authenticatable
 
     public function staff(){
         return $this->belongsTo(Staff::class,'uuid','user_uuid');
+    }
+
+    public function guardian(){
+        return $this->belongsTo(Guardian::class,'uuid','user_uuid');
+    }
+    public function student(){
+        return $this->belongsTo(Student::class,'uuid','user_uuid');
     }
 
     public function userType(){

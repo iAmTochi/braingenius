@@ -25,4 +25,16 @@ class Department extends Model
 
         return $this->belongsToMany(Classes::class);
     }
+
+
+    /**
+     * @param int $count
+     * @return mixed
+     */
+    public function latest($count = 20)
+    {
+        // TODO: Implement latest() method.
+    }
+
+
 }

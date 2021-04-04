@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 
+use App\Models\User;
 use App\Traits\DeleteFile;
 use App\Traits\UserUuidRouteKeyName;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,12 @@ class Guardian extends Model
         'created_by',
         'updated_by',
     ];
+
+
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_uuid','uuid');
+    }
 
 
 

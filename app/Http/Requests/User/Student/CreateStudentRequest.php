@@ -36,7 +36,7 @@ class CreateStudentRequest extends FormRequest
             'soo'           => 'required',
             'lga'           => 'required',
             'sport_house'   => 'string|required',
-            'class_arm'     => 'string|nullable',
+            'class_arm_reg' => 'string|nullable',
             //'guardian_uuid'     => 'string|required',
             'genotype'      => 'string|nullable',
             'religion'      => 'string|nullable',

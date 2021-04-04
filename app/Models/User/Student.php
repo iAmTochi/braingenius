@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\User;
 use App\Traits\DeleteFile;
 use App\Traits\UserUuidRouteKeyName;
 use Illuminate\Database\Eloquent\Model;
@@ -15,12 +16,10 @@ class Student extends Model
 
     protected $fillable = [
         'user_uuid',
-        'admin_num',
+        'admin_no',
         'last_name',
         'first_name',
         'other_name',
-        'phone',
-        'address',
         'dob',
         'gender',
         'image',
@@ -49,5 +48,21 @@ class Student extends Model
         'updated_by',
     ];
 
-    //
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_uuid','uuid');
+    }
+
+    public function students() {
+
+        return $this->select(['last_name','first_name','other_name','username','image','gender',
+            'students.user_uuid as uuid','classes.name as class','sport_houses.name as house',
+            'classes.name as class','arms.arm as arm',
+        ])
+            ->join('class_arms','class_arms.uuid','=','students.class_arm_uuid')
+            ->join('arms','arms.uuid','=','class_arms.arm_uuid')
+            ->join('classes','classes.uuid','=','class_arms.class_uuid')
+            ->join('sport_houses','sport_houses.uuid','=','students.house_uuid')
+            ->join('users','users.uuid','=','students.user_uuid')->get();
+    }
 }

@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
                 'address'=> '8 Oba Fatai Aleiru Street, Lagos',
                 'dob' => '1991-01-24',
                 'gender'=> 'M',
-                'image'=> 'passport/admin/tochi.jpg',
+                'image'=> 'passport/admin/code_tochi.jpg',
                 'created_by'=>$dev->uuid,
 
             ]);

@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('active_session', Session::where('status',1)->first() );
         Builder::$defaultStringLength = 191;
+        $sex = 'fuck';
     }
 }

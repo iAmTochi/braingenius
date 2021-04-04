@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Staff;
+namespace App\Http\Requests\User\Staff;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,10 +27,10 @@ class CreateStaffRequest extends FormRequest
             'title'                     => 'required',
             'last_name'                 => 'required',
             'first_name'                => 'required',
-            'other_name'                => 'nullable|required',
+            'other_name'                => 'nullable',
             'gender'                    => 'required',
             'dob'                       => 'required',
-            'email'                     => 'required|email|unique:users',
+            'email'                     => 'required|email|unique:staff',
             'address'                   => 'required',
             'role'                      => 'required',
             'rank'                      => 'nullable|required',

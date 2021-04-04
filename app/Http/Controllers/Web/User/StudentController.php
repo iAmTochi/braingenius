@@ -13,8 +13,10 @@ use App\Models\State\State;
 use App\Models\User;
 use App\Models\User\Guardian;
 use App\Models\User\Student;
+use App\Traits\ActiveSession;
 use App\Traits\GenerateUsername;
 use App\Traits\UploadPassport;
+use App\Traits\User\CreateUserData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -24,12 +26,16 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
-    use GenerateUsername, UploadPassport;
+    use CreateUserData, GenerateUsername, UploadPassport, ActiveSession;
     private $classArm;
+    private $student;
+    private $guardian;
 
     public function __construct()
     {
         $this->classArm = new ClassArm();
+        $this->student  = new Student();
+        $this->guardian = new Guardian();
     }
 
     /**
@@ -39,7 +45,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        //dd($this->student->students());
+        return view('users.student.index')
+            ->with('title','All Student')
+            ->with('count',0)
+            ->with('students', $this->student->students());
     }
 
     /**
@@ -69,45 +79,47 @@ class StudentController extends Controller
      */
     public function store(CreateStudentRequest $request)
     {
-        dd($request->all());
-        DB::beginTransaction();
 
+
+//        dd($request->all());
+        $guard_username = $this->generateUsername($request->p_first_name, $request->p_last_name, $request->p_other_name);
+        $stud_username = $this->generateUsername($request->first_name, $request->last_name, $request->other_name);
+        DB::beginTransaction();
         try {
+#=============== Creating guardian's account =========================
             $guard_user = User::create([
-                'username' => $this->generateUsername('','',''),
+                'username' => $guard_username,
                 'type'=> 'lvl02',
                 'status' => true,
                 //'email' => 'ugwukelvintochukwu@gmail.com',
                 'password' => Hash::make('Welcome@1'),
             ]);
+
+#===============Creating Student's account =================================
             $stud_user = User::create([
-                'username' => $this->generateUsername('','',''),
+                'username' => $stud_username,
                 'type'=> 'lvl01',
                 'status' => true,
                 //'email' => 'ugwukelvintochukwu@gmail.com',
                 'password' => Hash::make('Welcome@1'),
             ]);
 
-            $guardian = Guardian::create([
-                'user_uuid'     => $guard_user->uuid,
-                'title'         => $request->title,
-                'last_name'     => $request->p_last_name,
-                'first_name'    => $request->p_first_name,
-                'other_name'    => $request->p_other_name,
-                'email'     => $request->p_email,
-                'phone'     => $request->p_phone,
-                'image'     => $request->p_last_name,
-                'house_address'     => $request->home_address,
-                'office_address'    => $request->office_address,
-                'occupation'        => $request->occupation,
-                'next_kin'          => $request->next_kin,
-                'next_kin_phone'    => $request->next_kin_phone,
-                'created_by'    => auth()->user()->uuid,
-            ]);
+#================ Creating guardian's profile ==========================
+            $guardian_data = $this->guardianData($request, $guard_user->uuid);
+            if($request->hasFile('p_image')){
+                $guardian_data['p_image'] = $this->hasImage($request,'passport/guardians',NULL, $guard_username,'p_image');
+            }
+            $this->guardian->create($guardian_data);
 
-            $student = Student::create([
-                'user_uuid' => $stud_user->uuid,
-            ]);
+
+
+
+#================ Creating student's profile ==========================
+            $student_data = $this->studentData($request, $stud_user->uuid, $guard_user->uuid, $this->currentSession()->uuid);
+            if($request->hasFile('image')){
+                $student_data['image'] = $this->hasImage($request,'passport/students',NULL, $stud_username);
+            }
+            $this->student->create($student_data);
 
 
             DB::commit();
@@ -116,6 +128,11 @@ class StudentController extends Controller
             DB::rollBack();
             throw $ex;
         }
+
+        //flash message
+        session()->flash('success', 'Great! '. $request->first_name.' '.$request->last_name . ' has been registered successfully');
+        // redirect the user
+        return redirect()->route('student.index');
 
     }
 

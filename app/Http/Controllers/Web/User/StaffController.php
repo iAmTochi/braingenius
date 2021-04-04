@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Web\User;
 
-use App\Http\Requests\Staff\CreateStaffRequest;
+use App\Http\Requests\User\Staff\CreateStaffRequest;
+use App\Models\Classes\Department;
 use App\Models\User\Staff;
-use App\Repositories\Department\DepartmentRepository;
-use App\Repositories\Staff\StaffRepository;
 use App\Traits\UploadPassport;
 use App\Traits\User\CreateUserData;
 use App\Models\User;
@@ -21,15 +20,14 @@ class StaffController extends Controller
     private $department;
     private $staff;
 
-    public function __construct(DepartmentRepository $department,
-                                StaffRepository $staff)
+    public function __construct()
     {
         //$this->middleware('isStaff')->only(['profile','update']);
 
         $this->middleware('isAdmin')->except(['profile','update']);
 
-        $this->department = $department;
-        $this->staff = $staff;
+        $this->department = new Department();
+        $this->staff = new Staff();
     }
 
     /**
@@ -44,7 +42,7 @@ class StaffController extends Controller
         return view('users.staff.index')
             ->with('title','All Staff')
             ->with('count',0)
-            ->with('staffs',$this->staff->all());
+            ->with('staffs',$this->staff->staffs());
     }
 
 
@@ -59,7 +57,7 @@ class StaffController extends Controller
         return view('users.staff.create')
 //            ->with('types',Type::all())
             ->with('title','Create New Staff Account')
-            ->with('departments', $this->department->all());
+            ->with('departments', Department::all());
     }
 
     /**
@@ -77,7 +75,7 @@ class StaffController extends Controller
                 'username' => strtolower($request->first_name.'.'.substr($request->last_name,'0','3').(!empty($request->other_name)?'_'.substr($request->other_name,'0',2):"")),
                 'status' => true,
                 'type' => 'lvl03',
-                'email' => $request->email,
+//                'email' => $request->email,
                 'password' => Hash::make('password'),
             ]);
 
