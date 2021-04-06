@@ -241,7 +241,7 @@
                         <li class="sidebar-item"><a target="_blank" href="{{ route("student.index") }}" class="sidebar-link"><i class="mdi mdi-email-alert"></i><span class="hide-menu"> Students List</span></a></li>
                         <li class="sidebar-item"><a target="_blank" href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Withdrawn Students </span></a></li>
                         <li class="sidebar-item"><a target="_blank" href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Graduated Students </span></a></li>
-                        <li class="sidebar-item"><a target="_blank" href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Manage Parents </span></a></li>
+                        <li class="sidebar-item"><a target="_blank" href="{{ route("guardian.index") }}" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Manage Guardians </span></a></li>
                     </ul>
                 </li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-university"></i><span class="hide-menu">Class </span></a>

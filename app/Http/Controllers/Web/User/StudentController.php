@@ -107,7 +107,7 @@ class StudentController extends Controller
 #================ Creating guardian's profile ==========================
             $guardian_data = $this->guardianData($request, $guard_user->uuid);
             if($request->hasFile('p_image')){
-                $guardian_data['p_image'] = $this->hasImage($request,'passport/guardians',NULL, $guard_username,'p_image');
+                $guardian_data['image'] = $this->hasImage($request,'passport/guardians',NULL, $guard_username,'p_image');
             }
             $this->guardian->create($guardian_data);
 

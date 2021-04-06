@@ -39,6 +39,11 @@ class Guardian extends Model
         return $this->belongsTo(User::class,'user_uuid','uuid');
     }
 
+    public function students(){
+
+        return $this->hasMany(Student::class,'guardian_uuid','user_uuid');
+    }
+
 
 
 

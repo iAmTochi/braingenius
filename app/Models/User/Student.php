@@ -65,4 +65,9 @@ class Student extends Model
             ->join('sport_houses','sport_houses.uuid','=','students.house_uuid')
             ->join('users','users.uuid','=','students.user_uuid')->get();
     }
+
+    public function guardian(){
+
+//        return $this->belongsTo(Guardian::class,'guardian_uuid','user_uuid');
+    }
 }
