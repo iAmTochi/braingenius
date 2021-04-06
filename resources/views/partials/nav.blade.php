@@ -25,7 +25,7 @@
                         -->
                         
                         </span>
-                        <span style="font-color:#000">BrainGenius</span>
+                        <span style="color:#000; font-weight:bolder">BrainGenius</span>
         </a>
         <!-- ============================================================== -->
         <!-- End Logo -->
