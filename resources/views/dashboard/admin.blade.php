@@ -87,23 +87,31 @@
                     </div>
                     <div class="table-responsive mt-2">
                         <table class="table stylish-table mb-0 no-wrap v-middle table-bordered table-condensedbold">
-                            <thead>
+                            <thead class="bg-info">
                             <tr>
-                                <th class="font-weight-bold text-muted border-0 border-bottom">Class</th>
-                                <th class="font-weight-bold text-muted border-0 border-bottom">Students</th>
-                                <th class="font-weight-bold text-muted border-0 border-bottom">Bio Data Completion Rate</th>
-                                <th class="font-weight-bold text-muted border-0 border-bottom"></th>
+                                <th class="font-weight-normal text-white border-0 border-bottom">Class</th>
+                                <th class="font-weight-normal text-white border-0 border-bottom">Students</th>
+                                <th class="font-weight-normal text-white border-0 border-bottom">Bio Data Completion Rate</th>
+                                <th class="font-weight-normal text-white border-0 border-bottom"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($classes as  $class)
                             <tr>
-                                <td style="width:50px;"><span class="round rounded-circle square  text-white d-inline-block text-center bg-info">{{ $class->name }}</span></td>
+                                <td style="width:50px;"><span class="round rounded-circle   text-white d-inline-block text-center bg-info">{{ $class->name }}</span></td>
                                 <td>
-                                    <h6 class="font-weight-medium mb-0 nowrap">Sunil Joshi</h6><small class="text-muted no-wrap">Web Designer</small></td>
-                                <td>Elite Admin</td>
-                                <td><span class="badge badge-light-success text-success">Low</span></td>
-                                <td>$3.9K</td>
+                                    89
+                                </td>
+                                <td>
+                                    <div class="progress" style="height: 15px;">
+                                        <div class="progress-bar progress-xl progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">60%</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-rounded btn-primary" >See details</button>
+                                </td>
+
+
                             </tr>
                             @endforeach
                             </tbody>
