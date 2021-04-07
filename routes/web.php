@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard',            [DashboardController::class, 'index'])->name('home');
+    Route::get('admin/dashboard',            [DashboardController::class, 'index'])->name('home');
     Route::get('staff/my-profile',      [StaffController::class, 'profile'])->name('staff.profile');
 
 
