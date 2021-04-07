@@ -3,83 +3,40 @@
 namespace App\Http\Controllers\Web\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classes\Classes;
+use App\Models\User\Admin;
+use App\Models\User\Guardian;
+use App\Models\User\Staff;
+use App\Models\User\Student;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $students;
+    private $guardians;
+    private $staffs;
+    private $admins;
+    private $classes;
+
+
+    public function __construct(){
+        $this->students  = new Student();
+        $this->guardians = new Guardian();
+        $this->staffs    = new Staff();
+        $this->admins    = new Admin();
+        $this->classes   = new Classes();
+    }
+
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+       return view('dashboard.admin')
+           ->with('title', 'Dashboard')
+           ->with('total_students',  $this->students->count())
+           ->with('male_students',   $this->students->where('gender','M')->count())
+           ->with('female_students', $this->students->where('gender','F')->count())
+           ->with('total_guardians', $this->guardians->count())
+           ->with('total_staff',     $this->staffs->count())
+           ->with('total_admin',     $this->admins->count())
+           ->with('classes',     $this->classes->all('name'));
     }
 }

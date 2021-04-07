@@ -4,7 +4,7 @@ use App\Http\Controllers\Web\Classes\ArmController;
 use App\Http\Controllers\Web\Classes\ClassArmController;
 use App\Http\Controllers\Web\Classes\ClassesController;
 use App\Http\Controllers\Web\Configurations\SessionsController;
-use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\Dashboard\DashboardController;
 use App\Http\Controllers\Web\Department\DepartmentController;
 use App\Http\Controllers\Web\Subject\SubjectController;
 use App\Http\Controllers\Web\User\AdminController;
