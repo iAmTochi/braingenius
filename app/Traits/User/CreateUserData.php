@@ -79,6 +79,7 @@ trait CreateUserData
      * @return array
      */
     private function studentData($request,$stud_user_uuid, $guard_user_uuid, $current_session ){
+
         return $data = [
             'user_uuid'     => $stud_user_uuid,
             'guardian_uuid' => $guard_user_uuid,
@@ -94,7 +95,6 @@ trait CreateUserData
             'class_arm_uuid'     =>$request->class_arm_reg,
             'class_arm_reg_uuid' => $request->class_arm_reg,
             'resident_type'      => $request->residence_type,
-
             'genotype_id'       => $request->genotype,
             'religion_id'       => $request->religion,
             //'session_reg_uuid'  => $this->currentSession()->uuid,
@@ -103,6 +103,8 @@ trait CreateUserData
             'prev_sch_attended_date'=> $request->date_prev_sch,
             'created_by'            => auth()->user()->uuid,
         ];
+
+       
     }
 
 

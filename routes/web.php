@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Web\Classes\ArmController;
 use App\Http\Controllers\Web\Classes\ClassArmController;
 use App\Http\Controllers\Web\Classes\ClassesController;
@@ -62,9 +61,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('move', [SessionsController::class, 'move'])->name('move');
 
     });
-
-
-
 });
 
 

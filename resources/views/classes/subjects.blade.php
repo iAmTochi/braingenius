@@ -4,58 +4,6 @@
 
     <!-- Row -->
     <div class="row justify-content-md-center">
-        @isset($subject)
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Edit Subject</h4>
-                        <h6 class="card-subtitle"><small>Subject Name</small></h6>
-                        <form action="{{ route('subject.update', $subject->uuid) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="row">
-                                <!--/span-->
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="arm">Subject Name</label>
-                                        <input id="arm" value="{{ $subject->dept_name }}" name="dept_name" type="text" class="form-control @error('dept_name') is-invalid @enderror">
-                                        @error('dept_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="arm">Subject Name</label>
-                                        <input id="arm" value="{{ $subject->dept_name }}" name="dept_name" type="text" class="form-control @error('dept_name') is-invalid @enderror">
-                                        @error('dept_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="arm">Subject Name</label>
-                                        <input id="arm" value="{{ $subject->dept_name }}" name="dept_name" type="text" class="form-control @error('dept_name') is-invalid @enderror">
-                                        @error('dept_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <div class="form-group text-center">
-                                <button type="submit" class="btn btn-rounded btn-primary">Update Subject</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        @else
-
             <div class="col-12">
 
                 <div class="card">
@@ -66,7 +14,7 @@
                             <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary" data-toggle="modal" data-target="#addSubjectModal">New Subject</button>
                         </div>
                             <div class="text-left">
-                                <h class="subtitle">List of existing school subjects below</h>
+                                <h3 class="subtitle">List of existing school subjects below</h3>
 {{--                                <h6 class="card-subtitle">List of existing school subjects below</h6>--}}
                             </div>
 
@@ -87,18 +35,78 @@
                                 <tbody>
                                 @foreach($subjects as $subject)
                                     <tr>
-                                        <td>{{ ++$subjectCount }}</td>
+                                        <td>{{ $subject->id }}</td>
                                         <td>{{ $subject->full_name }}</td>
                                         <td>{{ $subject->short_name }}</td>
-                                        <td>{{ $subject->dept_name }} </td>
+                                        <td>{{ $subject->department->dept_name }} </td>
+
 
                                         <td >
-                                            <a href="{{ route('subject.edit', $subject->uuid) }}" class="btn btn-info btn-circle mr-2"><i class="fa py-0 px fa-edit"></i> </a>
-                                            <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>
-
+                                              <button type="button" class="btn btn-info btn-circle mr-2" data-toggle="modal" data-target="#editSubjectModal{{$subject->uuid}}"><i class="fa py-0 px fa-edit"></i></button>
+                                           <form  style="display:inline" class="deleteUser" method="post" action="{{route('subject.destroy', $subject->id)}}"> 
+                                           @csrf
+                                        @method('delete')
+                                            <button type="submit" onclick="return confirm('Are you Sure')" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>
+                                           
+                                             </form>
+                                             
                                         </td>
                                     </tr>
+                                
+   
+    <div class="modal fade" id="editSubjectModal{{$subject->uuid}}" tabindex="-1" role="dialog" aria-labelledby="editSubjectModal{{$subject->uuid}}">
+<div class="modal-dialog" role="document">
+<form  action="{{ route('subject.update',$subject->uuid)}}" method="POST">
+                    @method('put')
+                        @csrf
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <h4 class="modal-title" id="#editSubjectModal{{$subject->uuid}}">Edit Subject</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div> 
+                <div class="modal-body">
+                 
+                        <div class="form-group">
+                            <label for="full_name" class="control-label">Subject Name</label>
+                            <input  type="text"  value="{{$subject->full_name}}" class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name">
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('full_name')}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="short_name" class="control-label">Subject Short Name</label>
+                            <input type="text"  class="form-control @error('short_name') is-invalid @enderror" value="{{$subject->short_name}}" id="short_name" name="short_name">
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('short_name')}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <select name="department" class="select2 @error('department') is-invalid @enderror" style="width: 100%">
+                              
+                                @foreach($departments as $department)
+                                    <option value="{{ $department->uuid }}" @if($department->uuid == $subject->department->uuid) selected @endif>{{ $department->dept_name }}</option>
                                 @endforeach
+                            </select>
+                            <span role="alert" class="invalid-feedback">
+                                <strong>{{$errors->first('department')}}</strong>
+                            </span>
+
+                        </div>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-rounded" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-rounded"><i
+                            class="fas fa-check"></i> Save</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+ 
+                               @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -107,23 +115,25 @@
 
 
             </div>
-        @endisset
     </div>
     <!-- ./Row -->
     <!-- Row -->
 
     <!-- ./Row -->
+     
 
     <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="subjectModalLabel">
         <div class="modal-dialog" role="document">
+         <form id="addSubject" action="{{ route('subject.store') }}" method="POST">
+                        @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="subjectModalLabel">Create A New Subject</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
+
                 <div class="modal-body">
-                    <form id="addSubject" action="{{ route('subject.store') }}" method="POST">
-                        @csrf
+                   
                         <div class="form-group">
                             <label for="full_name" class="control-label">Subject Name</label>
                             <input value="{{ old('full_name') }}" type="text"  class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" placeholder="Mathematics">
@@ -151,17 +161,19 @@
 
                         </div>
 
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning btn-rounded" data-dismiss="modal">Close</button>
-                    <button type="submit" onclick="document.getElementById('addSubject').submit();" class="btn btn-primary btn-rounded"><i
+                    <button type="submit"  class="btn btn-primary btn-rounded"><i
                             class="fas fa-check"></i> Save</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
-
+                
+  
 
 
 @endsection
@@ -189,5 +201,7 @@
     <script src="{{ asset('') }}assets/extra-libs/sweetalert2/sweet-alert.init.js"></script>
     <script src="{{ asset('') }}js/main.js"></script>
     @include('partials.sweet_alert')
-
+   
 @endsection
+
+

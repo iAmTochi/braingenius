@@ -11,7 +11,6 @@ $(".deleteBtn").click(function () {
         },
         buttonsStyling: false,
     })
-
     swalWithBootstrapButtons.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -23,11 +22,11 @@ $(".deleteBtn").click(function () {
     }).then((result) => {
         if (result.value) {
             $('.deleteUser').submit();
-            swalWithBootstrapButtons.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
+           // swalWithBootstrapButtons.fire(
+            //    'Deleted!',
+             //   'Your file has been deleted.',
+             //   'success'
+           // )
         }
     })
 });

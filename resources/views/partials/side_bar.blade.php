@@ -230,18 +230,16 @@
                 </li>
                 <!-- User Profile-->
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal</span></li>
-                <li class="sidebar-item"> <a class="sidebar-link  waves-effect waves-dark" href="{{ route('home') }}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard <span class="badge badge-pill badge-success">5</span></span></a>
-
-                </li>
+                
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">ACADEMICS</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i  data-feather="users" class="feather-icon"></i><span class="hide-menu">Students </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a target="_blank" href="{{ route("student.create") }}" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu"> Register Student </span></a></li>
-                        <li class="sidebar-item"><a target="_blank" href="{{ route("student.index") }}" class="sidebar-link"><i class="mdi mdi-email-alert"></i><span class="hide-menu"> Students List</span></a></li>
-                        <li class="sidebar-item"><a target="_blank" href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Withdrawn Students </span></a></li>
-                        <li class="sidebar-item"><a target="_blank" href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Graduated Students </span></a></li>
-                        <li class="sidebar-item"><a target="_blank" href="{{ route("guardian.index") }}" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Manage Guardians </span></a></li>
+                        <li class="sidebar-item"><a href="{{ route("student.create") }}" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu"> Register Student </span></a></li>
+                        <li class="sidebar-item"><a  href="{{ route("student.index") }}" class="sidebar-link"><i class="mdi mdi-email-alert"></i><span class="hide-menu"> Students List</span></a></li>
+                        <li class="sidebar-item"><a  href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Withdrawn Students </span></a></li>
+                        <li class="sidebar-item"><a  href="inbox-email-compose.html" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Graduated Students </span></a></li>
+                        <li class="sidebar-item"><a  href="{{ route("guardian.index") }}" class="sidebar-link"><i class="mdi mdi-email-secure"></i><span class="hide-menu">Manage Guardians </span></a></li>
                     </ul>
                 </li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-university"></i><span class="hide-menu">Class </span></a>
