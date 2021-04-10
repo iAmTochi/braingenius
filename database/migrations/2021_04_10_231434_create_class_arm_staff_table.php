@@ -15,7 +15,14 @@ class CreateClassArmStaffTable extends Migration
     {
         Schema::create('class_arm_staff', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid');
+            $table->string('user_uuid');
+            $table->string('class_arm_uuid');
             $table->timestamps();
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
+
+            $table->softDeletes();
         });
     }
 
