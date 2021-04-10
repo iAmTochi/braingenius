@@ -260,7 +260,7 @@ File: js
                     show: false
                 },
                 title: "",
-                width: 18,
+                width: 25,
             },
             legend: {
                 hide: true
