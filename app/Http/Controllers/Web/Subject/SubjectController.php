@@ -32,10 +32,15 @@ class SubjectController extends Controller
 
         $title = 'Subject';
         $subjectCount = 0;
+        $sub = Subject::all();
+       // dd($this->subject->subjects());
+     //dd($sub[0]->department());
+
         return view('classes.subjects')
-            ->with('subjects', $this->subject->subjects())
-            ->with('departments', $this->department->departments())
-            ->with('title', $title)->with('subjectCount', $subjectCount);
+                  ->with('subjects', $sub)
+                 ->with('departments', $this->department->departments())
+                 ->with('title', $title)
+                 ->with('subjectCount', $subjectCount);
     }
 
     /**
@@ -45,7 +50,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        
+
     }
 
     /**
@@ -57,6 +63,7 @@ class SubjectController extends Controller
     public function store(CreateSubjectRequest $request)
     {
 
+       
         $this->subject->create([
             'full_name' => ucfirst($request->full_name),
             'short_name' => strtoupper($request->short_name),
@@ -88,7 +95,7 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -100,7 +107,20 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::where('uuid', $id)->first();
+        $subject->full_name = $request->full_name;
+        $subject->short_name = $request->short_name;
+        $subject->dept_uuid = $request->department;
+
+       // dd($subject);
+        if($subject->save()){
+            Session()->flash('success', 'Subject Updated Successfully');
+            return redirect()->back();
+        }
+
+        
+        
+
     }
 
     /**
@@ -111,6 +131,11 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd($id);
+        $subject = Subject::where('id', $id)->first();
+        if($subject->delete()){
+            Session()->flash('error', 'Subject Deleted Successfully');
+            return redirect()->back();
+        }
     }
 }

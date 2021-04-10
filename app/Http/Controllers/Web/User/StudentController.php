@@ -115,12 +115,14 @@ class StudentController extends Controller
 
 
 #================ Creating student's profile ==========================
+
             $student_data = $this->studentData($request, $stud_user->uuid, $guard_user->uuid, $this->currentSession()->uuid);
             if($request->hasFile('image')){
                 $student_data['image'] = $this->hasImage($request,'passport/students',NULL, $stud_username);
             }
-            $this->student->create($student_data);
 
+            $this->student->create($student_data);
+           
 
             DB::commit();
         } catch (\Exception $ex) {
