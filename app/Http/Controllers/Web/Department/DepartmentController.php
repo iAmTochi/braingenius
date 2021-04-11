@@ -16,9 +16,9 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|
+     * \Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -46,10 +46,8 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateDepartmentRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateDepartmentRequest $request)
     {
@@ -77,7 +75,8 @@ class DepartmentController extends Controller
 
     /**
      * @param Department $department
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
+     * |\Illuminate\View\View
      */
     public function edit(Department $department)
     {
@@ -88,18 +87,18 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CreateDepartmentRequest $request
+     * @param Department $department
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CreateDepartmentRequest $request, Department $department)
     {
         $data['dept_name'] = strtoupper($request->dept_name);
-        $data['updated_by'] = Auth::user()->uuid;
+        $data['updated_by'] = auth()->user()->uuid;
 
         $department->update($data);
+
+
 
         session()->flash('success','Department  Updated successfully');
 
@@ -107,13 +106,11 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
      */
     public function destroy($id)
     {
-        //
+        return $id;
     }
 }
