@@ -27,16 +27,6 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-//        die($_SERVER['REMOTE_ADDR']);
-//        die($_SERVER['GATEWAY_INTERFACE']);
-//        die($_SERVER['HTTP_USER_AGENT']);
-//        dd($_SERVER);
-//                $bro = Browser::browserName();
-                //dd(Browser::isDesktop());
-//         $browserDetails = Browser::browserName();
-//         $browser = Browser::platformName();
-//        dd($browserDetails."::".$browser);
-
         $title = 'Departments';
         $deptCount = 0;
         return view('classes.department')
