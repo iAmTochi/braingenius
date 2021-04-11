@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Web\Department;
 use App\Http\Requests\Department\CreateDepartmentRequest;
 use App\Models\Classes\Department;
 use App\Http\Controllers\Controller;
-use Browser;
+use App\Traits\ActivityLog\ActivityLogTrait;
+use Illuminate\Support\Facades\DB;
+
+
 
 class DepartmentController extends Controller
 {
+    use ActivityLogTrait;
     private $department;
+
 
     public function __construct()
     {
@@ -22,8 +27,12 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+//        die($_SERVER['REMOTE_ADDR']);
+//        die($_SERVER['GATEWAY_INTERFACE']);
+//        die($_SERVER['HTTP_USER_AGENT']);
+//        dd($_SERVER);
 //                $bro = Browser::browserName();
-                //dd(Browser::isMobile());
+                //dd(Browser::isDesktop());
 //         $browserDetails = Browser::browserName();
 //         $browser = Browser::platformName();
 //        dd($browserDetails."::".$browser);
@@ -52,12 +61,14 @@ class DepartmentController extends Controller
     public function store(CreateDepartmentRequest $request)
     {
 
-        $this->department->create([
+        $dept = $this->department->create([
             'dept_name' => strtoupper($request->dept_name),
             'created_by' => auth()->user()->uuid
         ]);
 
-        session()->flash('success','Department  Added successfully');
+        $this->create_activity('Created new department - '.$dept->dept_name);
+
+        session()->flash('success', $dept->dept_name.' department  added successfully');
 
         return redirect()->back();
     }
@@ -96,9 +107,17 @@ class DepartmentController extends Controller
         $data['dept_name'] = strtoupper($request->dept_name);
         $data['updated_by'] = auth()->user()->uuid;
 
-        $department->update($data);
+        DB::beginTransaction();
+        try {
+            $department->update($data);
 
+            $this->create_activity('Updated department name from '. $department->dept_name. ' to ' .strtoupper($request->dept_name));
 
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            throw $ex;
+        }
 
         session()->flash('success','Department  Updated successfully');
 

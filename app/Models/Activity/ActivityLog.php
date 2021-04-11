@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ActivityLog extends Model
 {
-    use SoftDeletes, HasFactory, Uuid;
+    use  HasFactory, Uuid;
 
     protected $fillable = [
         'user_uuid',
@@ -17,11 +17,12 @@ class ActivityLog extends Model
         'ip_address',
         'platform',
         'browser',
+        'is_mobile',
+        'is_tablet',
+        'is_desktop',
+        'device_model',
+        'device_family'
     ];
 
-    public function create_activity($activity,$user_uuid, $ip_address, $platform, $browser){
-        $this->create([
 
-        ]);
-    }
 }
