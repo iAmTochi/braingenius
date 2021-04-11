@@ -17,8 +17,9 @@ class CreateActivityLogsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->index();
             $table->string('user_uuid');
-            $table->text('activity');
+            $table->mediumText('activity');
             $table->string('ip_address');
+            $table->string('platform');
             $table->string('browser');
             $table->timestamps();
         });
