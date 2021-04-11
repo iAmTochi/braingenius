@@ -27,6 +27,12 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+//                $bro = Browser::browserName();
+                //dd(Browser::isMobile());
+//         $browserDetails = Browser::browserName();
+//         $browser = Browser::platformName();
+//        dd($browserDetails."::".$browser);
+
         $title = 'Departments';
         $deptCount = 0;
         return view('classes.department')
@@ -52,13 +58,6 @@ class DepartmentController extends Controller
      */
     public function store(CreateDepartmentRequest $request)
     {
-
-//        Browser::browserName();
-       // $browserDetails = Browser::browserName();
-       // $browser = Browser::platformName();
-//        dd($browserDetails."::".$browser);
-
-
 
         $this->department->create([
             'dept_name' => strtoupper($request->dept_name),
