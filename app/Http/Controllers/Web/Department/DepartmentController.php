@@ -1,14 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Web\Department;
-
-use App\Helpers\UuidHelper;
 use App\Http\Requests\Department\CreateDepartmentRequest;
 use App\Models\Classes\Department;
-
-
 use App\Http\Controllers\Controller;
-//use Illuminate\Support\Facades\Auth;
 use Browser;
 
 class DepartmentController extends Controller
