@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\View\View;
 
 
 class StudentController extends Controller
@@ -55,20 +55,22 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
         //dd($this->classArm->all());
-        return view('users.student.create')
-            ->with('title', 'Student Registration')
-            ->with('states', State::all())
-            ->with('lgas', Lga::all())
-            ->with('genotypes', Genotype::all())
-            ->with('religions', Religion::all())
-            ->with('residenceTypes', ResidenceType::all())
-            ->with('sportHouses', SportHouse::all())
-            ->with('classArms', $this->classArm->classArms());
+        $data = [
+            'title'     => 'Student Registration',
+            'states'    => State::all(),
+            'lgas'      => Lga::all(),
+            'genotypes' => Genotype::all(),
+            'religions' => Religion::all(),
+            'residenceTypes'=> ResidenceType::all(),
+            'sportHouses'   => SportHouse::all(),
+            'classArms'     => $this->classArm->classArms()
+        ];
+        return view('users.student.create', $data);
     }
 
     /**
@@ -122,7 +124,7 @@ class StudentController extends Controller
             }
 
             $this->student->create($student_data);
-           
+
 
             DB::commit();
         } catch (\Exception $ex) {
