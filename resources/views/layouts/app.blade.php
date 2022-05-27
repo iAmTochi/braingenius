@@ -12,9 +12,9 @@
     <title>{{ $title }} | Brain Genius</title>
     <link rel="canonical" href="" />
     <!-- page CSS -->
-    @yield('css')
-    <!-- Custom CSS -->
     <link href="{{ asset('') }}css/style.min.css" rel="stylesheet">
+    @yield('css')
+
     <style>
         .btn-warning,
         .badge-warning
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-    @endisset
+        @endisset
         <!-- ============================================================== -->
         <!-- End Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
